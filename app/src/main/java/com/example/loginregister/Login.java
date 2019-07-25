@@ -1,6 +1,5 @@
 package com.example.loginregister;
 
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -48,7 +47,9 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
 
                 User user  = new User(username, password);
 
-                authenticate(user);
+                logUserIn(user);
+
+//                authenticate(user);
 
                 break;
             case R.id.tvRegisterLink:
@@ -61,38 +62,38 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
 
     }
 
-    private void authenticate(User user){
-
-        ServerRequests serverRequests = new ServerRequests(this);
-        serverRequests.fetchUserDataInBackground(user, new GetUserCallback() {
-            @Override
-            public void done(User returnedUser) {
-
-                if (returnedUser == null){
-                    showErrorMessage();
-                }else{
-                    logUserIn(returnedUser);
-                }
-
-            }
-        });
-
-
-    }
-
-    private void showErrorMessage(){
-
-        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(Login.this);
-        dialogBuilder.setMessage("Invalid Username or Password");
-        dialogBuilder.setPositiveButton("ok", null);
-        dialogBuilder.show();
-
-    }
+//    private void authenticate(User user){
+//
+//        ServerRequests serverRequests = new ServerRequests(this);
+//        serverRequests.fetchUserDataInBackground(user, new GetUserCallback() {
+//            @Override
+//            public void done(User returnedUser) {
+//
+//                if (returnedUser == null){
+//                    showErrorMessage();
+//                }else{
+//                    logUserIn(returnedUser);
+//                }
+//
+//            }
+//        });
+//
+//
+//    }
+//
+//    private void showErrorMessage(){
+//
+//        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(Login.this);
+//        dialogBuilder.setMessage("Invalid Username or Password");
+//        dialogBuilder.setPositiveButton("ok", null);
+//        dialogBuilder.show();
+//
+//    }
 
     private void logUserIn(User returnedUser){
         userLocalStore.storeUserData(returnedUser);
-        userLocalStore.getLoggedInUser();
+        userLocalStore.setUserLoggedIn(true);
 
-        startActivity(new Intent(this, MainActivity.class));
+        startActivity(new Intent(this, MapsActivity.class));
     }
 }

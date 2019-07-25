@@ -149,11 +149,10 @@ public class ServerRequests {
 
                 }else{
 
-                    String username = jObject.getString("username");
                     String firstname = jObject.getString("firstname");
                     String lastname = jObject.getString("lastname");
 
-                    returnedUser = new User(username, firstname, lastname, user.email, user.password);
+                    returnedUser = new User(firstname, lastname, user.email, user.username, user.password);
                 }
 
 
