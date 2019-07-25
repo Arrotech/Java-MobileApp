@@ -11,7 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     Button bLogout;
-    EditText etUsername, etFirstName, etLastName;
+    EditText etFirstName, etLastName;
     UserLocalStore userLocalStore;
 
     @Override
@@ -19,7 +19,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        etUsername = (EditText) findViewById(R.id.etUsername);
         etFirstName = (EditText) findViewById(R.id.etFirstName);
         etLastName = (EditText) findViewById(R.id.etLastName);
         bLogout = (Button) findViewById(R.id.bLogout);
@@ -50,7 +49,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         User user = userLocalStore.getLoggedInUser();
 
-        etUsername.setText(user.username);
         etFirstName.setText(user.firstname);
         etLastName.setText(user.lastname);
 
